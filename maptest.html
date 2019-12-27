@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Hello, World</title>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px
+        }
+
+        #container {
+            height: 100%
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2&ak=hMyRuRXrXuUBxEjnD2v3g3RHhogTZDvy">
+        //v3.0版本的引用方式：src="http://api.map.baidu.com/api?v=3.0&ak=您的密钥"
+    </script>
+</head>
+
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+    // 创建地图实例
+    var map = new BMap.Map("container", {
+            enableBizAuthLogo: false
+        }
+    );
+    // 创建点坐标
+    var point = new BMap.Point(120.135866, 30.267913);
+    // 初始化地图，设置中心点坐标和地图级别
+    map.centerAndZoom(point, 15);
+    //开启鼠标滚轮缩放
+    map.enableScrollWheelZoom(true);
+
+    map.addControl(new BMap.NavigationControl());
+
+    var opts = {offset: new BMap.Size(150, 5)}
+    map.addControl(new BMap.ScaleControl(opts));
+
+    var customLayer=new BMap.CustomLayer({
+        geotable_id: 208086,
+        q: '', //检索关键字
+        tags: '', //空格分隔的多字符串
+        filter: '', //过滤条件,参考http://lbsyun.baidu.com/index.php?title=lbscloud/api/geosearch
+        pointDensityType: BMAP_POINT_DENSITY_HIGH
+    });
+
+    map.addTileLayer(customLayer);//添加自定义图层
+
+</script>
+</body>
+</html>
